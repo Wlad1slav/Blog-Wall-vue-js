@@ -1,0 +1,44 @@
+@import "variables";
+
+* {
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    padding: 0 20%;
+    position: relative;
+}
+
+textarea {
+    resize: none;
+}
+
+// required
+.req::after {
+    content: '*';
+    color: $clr--red;
+}
+
+// content, which may be controversial, which may offend someone
+.controversial {
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.controversial--view {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+// Icons from Google
+.material-symbols-outlined {
+    user-select: none;
+}
