@@ -36,30 +36,27 @@
       border: 1px solid transparentize($clr--text, 0.9);
       padding: 0;
 
-      li {
-        list-style: none;
-        padding: 5px 100px 5px 5px;
+      a {
+        text-decoration: none;
+        color: $clr--text;
 
-        &:hover {
-          background-color: transparentize($clr--text, 0.9);
-          cursor: pointer;
+        li {
+          list-style: none;
+          padding: 5px 100px 5px 5px;
 
-          // Alerts
-          &.danger {
-            background-color: $clr--red;
+          &:hover {
+            background-color: transparentize($clr--text, 0.9);
+            cursor: pointer;
 
-            a {
+            // Alerts
+            &.danger {
+              background-color: $clr--red;
               color: white;
             }
+            &.warn {
+              background-color: $clr--yellow;
+            }
           }
-          &.warn {
-            background-color: $clr--yellow;
-          }
-        }
-
-        a {
-          text-decoration: none;
-          color: $clr--text;
         }
       }
     }

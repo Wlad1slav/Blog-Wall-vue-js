@@ -5,18 +5,18 @@
       more_horiz
     </span>
     <ul :class="{hidden: !activeMenu}">
-      <li>
-        <a href="#">Pin</a>
-      </li>
-      <li>
-        <a href="#">Edit</a>
-      </li>
-      <li class="warn">
-        <a href="#">Hide</a>
-      </li>
-      <li class="danger">
-        <a href="#">Delete</a>
-      </li>
+      <a href="#">
+        <li>Pin</li>
+      </a>
+      <a href="#">
+        <li>Edit</li>
+      </a>
+      <a href="#">
+        <li class="warn">Hide</li>
+      </a>
+      <a href="#">
+        <li class="danger">Delete</li>
+      </a>
     </ul>
   </div>
 
