@@ -3,6 +3,12 @@
     <h3>{{ title }}</h3>
     <p>{{ content }}</p>
     <post-menu></post-menu>
+    <post-reaction
+        :likes="reactionsAmount.likes"
+        :dislikes="reactionsAmount.dislikes"
+        :views="reactionsAmount.views"
+        :comments="reactionsAmount.comments"
+    ></post-reaction>
   </div>
 </template>
 
@@ -13,10 +19,11 @@
 <script>
 
   import PostMenu from "@/components/PostMenu.vue";
+  import PostReaction from "@/components/PostReaction.vue";
 
   export default {
-    components: {PostMenu},
-    props: ['title', 'content', 'index'],
+    components: {PostMenu, PostReaction},
+    props: ['title', 'content', 'index', 'reactionsAmount'],
   }
 
 </script>
