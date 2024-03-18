@@ -13,8 +13,21 @@
     <!-- Like reaction -->
     <div class="reaction"
          :class="isLiked ? 'active' : null"
+         @click="() => {
+           if (!isLiked) {
+              isLiked = true;
+              likes++;
+           } else {
+              isLiked = false;
+              likes--;
+           }
+           if (isDisliked) {
+             isDisliked = false;
+             dislikes--;
+           }
+         }"
     >
-      <span class="material-symbols-outlined">
+      <span class="material-symbols-outlined" :class="isLiked ? 'yo-yo' : null">
         thumb_up
       </span>
       <p>{{ likes }}</p>
@@ -30,8 +43,22 @@
 
     <!-- Dislike reaction -->
     <div class="reaction"
-         :class="isDisliked ? 'active' : null">
-      <span class="material-symbols-outlined">
+         :class="isDisliked ? 'active' : null"
+         @click="() => {
+           if (!isDisliked) {
+             isDisliked = true;
+             dislikes++;
+           } else {
+             isDisliked = false;
+             dislikes--;
+           }
+           if (isLiked) {
+             isLiked = false;
+             likes--;
+           }
+         }"
+    >
+      <span class="material-symbols-outlined" :class="isDisliked ? 'yo-yo' : null">
         thumb_down
       </span>
       <p>{{ dislikes }}</p>
