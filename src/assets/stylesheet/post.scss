@@ -87,6 +87,12 @@
         transition: all 0.2s ease;
       }
 
+      &.active {
+        * {
+          color: $clr--text;
+        }
+      }
+
       &:hover {
         cursor: pointer;
 
@@ -99,9 +105,18 @@
         }
       }
 
-      &.important:hover { // A smooth zoom animation is added to important reactions
-        .material-symbols-outlined {
-          transform: scale(120%);
+      &.important {
+        &:hover { // A smooth zoom animation is added to important reactions
+          .material-symbols-outlined {
+            transform: scale(120%);
+          }
+        }
+
+        &.active {
+          .material-symbols-outlined {
+            transform: scale(120%);
+            color: $clr--red;
+          }
         }
       }
 
