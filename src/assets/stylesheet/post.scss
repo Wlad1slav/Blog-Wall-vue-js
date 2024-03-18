@@ -33,7 +33,7 @@
     ul {
       margin-top: 25px;
       background-color: white;
-      border: 1px solid transparentize($clr--text, 0.9);
+      border: 1px solid transparentize($clr--text, 1);
       padding: 0;
 
       a {
@@ -59,6 +59,52 @@
           }
         }
       }
+    }
+  }
+
+  // Container with reactions to posts
+  .post--reactions {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    .reaction {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      cursor: pointer;
+
+      p {
+        color: transparentize($clr--text, 0.3);
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
+
+      .material-symbols-outlined {
+        color: transparentize($clr--text, 0.5);
+        transition: all 0.2s ease;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        .material-symbols-outlined {
+          color: $clr--text;
+        }
+
+        p {
+          color: $clr--text;
+        }
+      }
+
+      &.important:hover { // A smooth zoom animation is added to important reactions
+        .material-symbols-outlined {
+          transform: scale(120%);
+        }
+      }
+
     }
   }
 }
