@@ -2,7 +2,7 @@
 
 #posts {
   display: flex;
-  flex-direction: column-reverse; // Makes the menu output more correct
+  flex-direction: column; //column-reverse; // Makes the menu output more correct
 }
 
 .post {
@@ -33,8 +33,12 @@
     ul {
       margin-top: 25px;
       background-color: white;
-      border: 1px solid transparentize($clr--text, 1);
+      border: 1px solid transparentize($clr--text, 0.9);
       padding: 0;
+
+      position: absolute;
+      z-index: 5;
+      right: 0;
 
       a {
         text-decoration: none;
@@ -50,11 +54,11 @@
 
             // Alerts
             &.danger {
-              background-color: $clr--red;
-              color: white;
+              background-color: $clr--red__hover;
+              //color: white;
             }
             &.warn {
-              background-color: $clr--yellow;
+              background-color: $clr--yellow__hover;
             }
           }
         }
