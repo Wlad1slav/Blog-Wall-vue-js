@@ -9,7 +9,7 @@
         :views="reactions.amounts.views"
         :comments="reactions.amounts.comments"
         :is-liked="reactions.reacted.isLiked"
-        :is-disliked="reactions.reacted.isDisliked "
+        :is-disliked="reactions.reacted.isDisliked"
     ></post-reaction>
   </div>
 </template>
