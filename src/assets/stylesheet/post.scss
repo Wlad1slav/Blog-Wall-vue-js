@@ -3,8 +3,8 @@
 $borders-width: 1px;
 
 @mixin border {
-  //border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  border-top: $borders-width solid rgba(0, 0, 0, 0.2);
+  border-bottom: $borders-width solid rgba(0, 0, 0, 0.2);
+  //border-top: $borders-width solid rgba(0, 0, 0, 0.2);
   border-right: $borders-width solid rgba(0, 0, 0, 0.2);
   border-left: $borders-width solid rgba(0, 0, 0, 0.2);
 }
@@ -85,6 +85,7 @@ $borders-width: 1px;
     .reaction {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
       user-select: none;
       cursor: pointer;
