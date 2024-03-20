@@ -31,10 +31,23 @@
         'Noto Sans Simplified Chinese',
         serif;
     color: $clr--text;
+    font-size: $font-size;
     letter-spacing: 1px;
 }
 
 a {
     // link styles
     color: $clr--link;
+}
+
+h1 {
+    font-size: $font-size-heading1;
+}
+
+h2 {
+    font-size: $font-size-heading2;
+}
+
+h3 {
+    font-size: $font-size-heading3;
 }

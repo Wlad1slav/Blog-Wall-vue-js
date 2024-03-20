@@ -10,6 +10,10 @@ $clr--yellow__hover: lighten(transparentize($clr--yellow, 0.5), 25%);
 // typography
 $clr--text: rgb(30,30,30); // standard text color
 $clr--link: $clr--theme;
+$font-size: 16px;
+$font-size-heading1: 30px;
+$font-size-heading2: 24px;
+$font-size-heading3: 18px;
 
 // INDENTS
 $indent--small: 6px;
