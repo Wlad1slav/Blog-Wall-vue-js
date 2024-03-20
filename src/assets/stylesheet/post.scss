@@ -1,14 +1,23 @@
 @import "variables";
 
+$borders-width: 1px;
+
+@mixin border {
+  //border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  border-top: $borders-width solid rgba(0, 0, 0, 0.2);
+  border-right: $borders-width solid rgba(0, 0, 0, 0.2);
+  border-left: $borders-width solid rgba(0, 0, 0, 0.2);
+}
+
 #posts {
   display: flex;
   flex-direction: column; //column-reverse; // Makes the menu output more correct
 }
 
 .post {
-  position: relative;
+  @include border;
 
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  position: relative;
   padding: 5px 30px;
 
   .more {
@@ -93,20 +102,22 @@
       }
 
       &.active {
-        * {
-          color: $clr--text;
+        .material-symbols-outlined {
+          color: $clr--theme;
         }
       }
 
       &:hover {
         cursor: pointer;
 
-        .material-symbols-outlined {
-          color: $clr--text;
+        .material-symbols-outlined, p {
+          color: $clr--theme;
         }
 
-        p {
-          color: $clr--text;
+        &.active {
+          .material-symbols-outlined, p {
+            color: $clr--text;
+          }
         }
       }
 
@@ -127,4 +138,30 @@
 
     }
   }
+}
+
+// The container in which the new post is written
+.post--write {
+  @include border;
+
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+  }
+
+  textarea {
+    border: none;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    height: 100px;
+    padding: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
 }

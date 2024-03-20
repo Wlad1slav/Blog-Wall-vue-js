@@ -1,6 +1,8 @@
 <template>
 
   <div id="posts">
+    <post-write></post-write>
+
     <post v-for="(post, index) in posts"
           :title="post.title"
           :content="post.content"
@@ -19,9 +21,10 @@
 
 <script>
   import Post from "@/components/Post.vue";
+  import PostWrite from "@/components/PostWrite.vue";
 
   export default {
-    components: {Post},
+    components: {Post, PostWrite},
     data() {
       return {
         posts: [
@@ -44,7 +47,7 @@
           },
           {
             reactions: {
-              amounts: {likes: 12, dislikes: 6, views: 377, comments: 32},
+              amounts: {likes: 6, dislikes: 12, views: 377, comments: 32},
               reacted: {isLiked: false, isDisliked: true}
             },
             content: 'As tensions escalate globally, the recent summit has highlighted the urgent need for diplomacy in addressing climate change. Leaders from around the world convened to discuss actionable strategies, emphasizing the necessity of unified efforts to combat this pressing issue. The summit\'s focus on innovative technologies and renewable energy investments marks a pivotal step toward a sustainable future, urging nations to prioritize environmental health over geopolitical divides.'
