@@ -1,9 +1,10 @@
 <template>
 
-  <div class="post--reactions">
+
+  <div class="post--reactions" v-show="config.enable?.actions">
 
     <!-- Views amount -->
-    <div class="reaction">
+    <div class="reaction" v-show="config.enable?.views">
       <span class="material-symbols-outlined">
         bar_chart
       </span>
@@ -11,7 +12,8 @@
     </div>
 
     <!-- Like reaction -->
-    <div class="reaction"
+    <div v-show="config.enable?.likes"
+         class="reaction"
          :class="isLiked ? 'active' : null"
          @click="() => {
            if (!isLiked) {
@@ -34,7 +36,9 @@
     </div>
 
     <!-- Like & dislikes amount -->
-    <div class="reaction important" :class="isLiked || isDisliked ? 'active' : null">
+    <div v-show="config.enable?.likes || config.enable?.dislikes"
+         class="reaction important"
+         :class="isLiked || isDisliked ? 'active' : null">
       <span class="material-symbols-outlined">
         {{ isDisliked ? 'heart_broken' : 'favorite' }}
       </span>
@@ -42,7 +46,8 @@
     </div>
 
     <!-- Dislike reaction -->
-    <div class="reaction"
+    <div v-show="config.enable?.dislikes"
+         class="reaction"
          :class="isDisliked ? 'active' : null"
          @click="() => {
            if (!isDisliked) {
@@ -65,7 +70,8 @@
     </div>
 
     <!-- Reviews amount -->
-    <div class="reaction">
+    <div v-show="config.enable?.comments"
+         class="reaction">
       <span class="material-symbols-outlined">
         comment
       </span>
@@ -80,6 +86,21 @@
 
 export default {
   props: ['likes', 'dislikes', 'views', 'comments', 'isLiked', 'isDisliked'],
+  created() {
+    this.getActionsConfig();
+  },
+  data() {
+    return {
+      config: {}
+    }
+  },
+  methods: {
+    async getActionsConfig() {
+      let config = await fetch('configActions.json');
+      this.config = await config.json();
+      console.log(this.config.enable.actions);
+    }
+  }
 }
 
 </script>
