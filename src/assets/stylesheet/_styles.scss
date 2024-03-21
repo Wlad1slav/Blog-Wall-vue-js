@@ -24,6 +24,10 @@ textarea {
     color: $clr--red;
 }
 
+.clickable {
+    cursor: pointer !important;
+}
+
 // content, which may be controversial, which may offend someone
 .controversial {
     opacity: 0.3;
