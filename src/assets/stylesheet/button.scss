@@ -12,6 +12,11 @@
     &:focus {
         background: darken($background, 5%);
     }
+    &:disabled {
+        background: transparentize($background, 0.5);
+        cursor: auto !important;
+        outline: none;
+    }
 }
 
 // standard buttons
@@ -32,6 +37,10 @@
 
     &.btn-accent {
         @include btn-color($clr--accent, white, $clr--accent);
+    }
+
+    &.btn-dangerous {
+        @include btn-color($clr--red, white, $clr--red);
     }
 
     &.btn-transparent {
