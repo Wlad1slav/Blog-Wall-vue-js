@@ -14,7 +14,7 @@
     <!-- Like reaction -->
     <div v-show="config.enable?.likes"
          class="reaction"
-         :class="isLiked ? 'active' : null"
+         :class="[isLiked ? 'active' : null, !config.enable?.dislikes ? 'important clickable' : null]"
          @click="() => {
            if (!isLiked) {
               isLiked = true;
@@ -30,13 +30,13 @@
          }"
     >
       <span class="material-symbols-outlined" :class="isLiked ? 'yo-yo' : null">
-        thumb_up
+        {{ config.enable?.dislikes ? 'thumb_up' : 'favorite' }}
       </span>
       <p>{{ likes }}</p>
     </div>
 
     <!-- Like & dislikes amount -->
-    <div v-show="config.enable?.likes || config.enable?.dislikes"
+    <div v-show="config.enable?.likes && config.enable?.dislikes"
          class="reaction important"
          :class="isLiked || isDisliked ? 'active' : null">
       <span class="material-symbols-outlined">
@@ -48,7 +48,7 @@
     <!-- Dislike reaction -->
     <div v-show="config.enable?.dislikes"
          class="reaction"
-         :class="isDisliked ? 'active' : null"
+         :class="[isDisliked ? 'active' : null, !config.enable?.likes ? 'important clickable' : null]"
          @click="() => {
            if (!isDisliked) {
              isDisliked = true;
@@ -64,7 +64,7 @@
          }"
     >
       <span class="material-symbols-outlined" :class="isDisliked ? 'yo-yo' : null">
-        thumb_down
+        {{ config.enable?.likes ? 'thumb_down' : 'heart_broken' }}
       </span>
       <p>{{ dislikes }}</p>
     </div>
