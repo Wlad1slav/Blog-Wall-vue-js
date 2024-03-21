@@ -84,14 +84,38 @@
 
 <script>
 
+// Standard object for values of the number of set reactions
+const defaultAmountProps = {
+  type: Number,
+  default(rawProps) {
+    return 0;
+  }
+}
+
+// Standard object for values whether like or dislike is set
+const defaultBooleanProps = {
+  type: Boolean,
+  default(rawProps) {
+    return false;
+  }
+}
+
 export default {
-  props: ['likes', 'dislikes', 'views', 'comments', 'isLiked', 'isDisliked'],
+  // props: ['likes', 'dislikes', 'views', 'comments', 'isLiked', 'isDisliked'],
+  props: {
+    likes: defaultAmountProps,
+    dislikes: defaultAmountProps,
+    views: defaultAmountProps,
+    comments: defaultAmountProps,
+    isLiked: defaultBooleanProps,
+    isDisliked: defaultBooleanProps,
+  },
   created() {
     this.getActionsConfig();
   },
   data() {
     return {
-      config: {}
+      config: {},
     }
   },
   methods: {
