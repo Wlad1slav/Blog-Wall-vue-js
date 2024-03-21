@@ -124,6 +124,7 @@ $borders-width: 1px;
 
       &.important {
         &:hover { // A smooth zoom animation is added to important reactions
+          cursor: auto;
           .material-symbols-outlined {
             transform: scale(120%);
           }
