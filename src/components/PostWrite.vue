@@ -46,7 +46,8 @@ export default {
         return;
       }
 
-      this.postCreate(this.postContent);
+      this.$emit('postCreate', this.postContent)
+
       this.postContent = '';
     }
   }
