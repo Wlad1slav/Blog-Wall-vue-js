@@ -1,5 +1,6 @@
 <template>
   <div class="post" :key="index">
+    <p class="date">{{ dateTimeCreate }}</p>
     <h3>{{ title }}</h3>
     <p>{{ content }}</p>
     <post-menu></post-menu>
@@ -25,7 +26,23 @@
 
   export default {
     components: {PostMenu, PostReaction},
-    props: ['title', 'content', 'index', 'reactions'],
+    props: {
+      title: {
+        type: String,
+      },
+      content: {
+        type: String,
+      },
+      index: {
+        type: Number,
+      },
+      reactions: {
+        type: Object,
+      },
+      dateTimeCreate: {
+        type: String,
+      }
+    }
   }
 
 </script>

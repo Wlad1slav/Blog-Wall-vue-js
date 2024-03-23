@@ -146,6 +146,12 @@ $borders-width: 1px;
 
     }
   }
+
+  // the date the post was created
+  .date {
+    color: transparentize($clr--text, 0.5);
+    font-size: $font-size - 4;
+  }
 }
 
 // The container in which the new post is written

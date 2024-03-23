@@ -9,6 +9,7 @@
           :content="post.content"
           :key="index"
           :reactions="post.reactions"
+          :date-time-create="post.date"
     ></post>
   </div>
 
@@ -28,15 +29,26 @@ export default {
     components: {Post, PostWrite},
     created() { // before created
       this.loadPosts();
+      this.loadConfig();
     },
     computed: {
       getPosts() {
-        return [...this.posts].reverse();
+        // Sorting of all posts by creation date
+        return [...this.posts].sort(function(a, b) {
+          // Convert the date strings to Date objects
+          let dateA = new Date(a.date);
+          let dateB = new Date(b.date);
+
+          // Subtract the dates to get a value that is either negative, positive, or zero
+          return dateB - dateA;
+        });
+
       }
     },
     data() {
       return {
         posts: [],
+        config: {}
       };
     },
     methods: {
@@ -44,11 +56,20 @@ export default {
         let posts = await fetch('posts.json');
         this.posts = await posts.json();
       },
+
+      async loadConfig() { // get project config
+        let config = await fetch('config.json');
+        this.config = await config.json();
+      },
+
       postCreate(postObj) { // method that creates another post
+        const currentDate = new Date().toLocaleString(this.config.dateFormat.locales, this.config.dateFormat);
         this.posts.push({
-          content: postObj
+          content: postObj,
+          date: currentDate
         });
       }
+
     }
   }
 
