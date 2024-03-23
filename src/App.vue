@@ -1,10 +1,10 @@
 <template>
 
   <div id="posts">
-    <post-write></post-write>
+    <post-write @post-create="postCreate"></post-write>
 
     <post v-if="posts.length > 0"
-          v-for="(post, index) in posts"
+          v-for="(post, index) in getPosts"
           :title="post.title"
           :content="post.content"
           :key="index"
@@ -27,18 +27,27 @@ import PostWrite from "@/components/PostWrite.vue";
 export default {
     components: {Post, PostWrite},
     created() { // before created
-      this.getPosts();
+      this.loadPosts();
+    },
+    computed: {
+      getPosts() {
+        return [...this.posts].reverse();
+      }
     },
     data() {
       return {
         posts: [],
-        moreMenu: -1,
       };
     },
     methods: {
-      async getPosts() { // get all posts
+      async loadPosts() { // get all posts
         let posts = await fetch('posts.json');
         this.posts = await posts.json();
+      },
+      postCreate(postObj) { // method that creates another post
+        this.posts.push({
+          content: postObj
+        });
       }
     }
   }
