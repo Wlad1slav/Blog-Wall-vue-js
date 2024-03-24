@@ -1,10 +1,10 @@
 <template>
 
 
-  <div class="post--reactions" v-show="config.enable?.actions">
+  <div class="post--reactions" v-show="$configReactions.enable?.actions">
 
     <!-- Views amount -->
-    <div class="reaction" v-show="config.enable?.views">
+    <div class="reaction" v-show="$configReactions.enable?.views">
       <span class="material-symbols-outlined">
         bar_chart
       </span>
@@ -12,9 +12,9 @@
     </div>
 
     <!-- Like reaction -->
-    <div v-show="config.enable?.likes"
+    <div v-show="$configReactions.enable?.likes"
          class="reaction"
-         :class="[isLiked ? 'active' : null, !config.enable?.dislikes ? 'important clickable' : null]"
+         :class="[isLiked ? 'active' : null, !$configReactions.enable?.dislikes ? 'important clickable' : null]"
          @click="() => {
            if (!isLiked) {
               isLiked = true;
@@ -30,13 +30,13 @@
          }"
     >
       <span class="material-symbols-outlined" :class="isLiked ? 'yo-yo' : null">
-        {{ config.enable?.dislikes ? 'thumb_up' : 'favorite' }}
+        {{ $configReactions.enable?.dislikes ? 'thumb_up' : 'favorite' }}
       </span>
       <p>{{ likes }}</p>
     </div>
 
     <!-- Like & dislikes amount -->
-    <div v-show="config.enable?.likes && config.enable?.dislikes"
+    <div v-show="$configReactions.enable?.likes && $configReactions.enable?.dislikes"
          class="reaction important"
          :class="isLiked || isDisliked ? 'active' : null">
       <span class="material-symbols-outlined">
@@ -46,9 +46,9 @@
     </div>
 
     <!-- Dislike reaction -->
-    <div v-show="config.enable?.dislikes"
+    <div v-show="$configReactions.enable?.dislikes"
          class="reaction"
-         :class="[isDisliked ? 'active' : null, !config.enable?.likes ? 'important clickable' : null]"
+         :class="[isDisliked ? 'active' : null, !$configReactions.enable?.likes ? 'important clickable' : null]"
          @click="() => {
            if (!isDisliked) {
              isDisliked = true;
@@ -64,13 +64,13 @@
          }"
     >
       <span class="material-symbols-outlined" :class="isDisliked ? 'yo-yo' : null">
-        {{ config.enable?.likes ? 'thumb_down' : 'heart_broken' }}
+        {{ $configReactions.enable?.likes ? 'thumb_down' : 'heart_broken' }}
       </span>
       <p>{{ dislikes }}</p>
     </div>
 
     <!-- Reviews amount -->
-    <div v-show="config.enable?.comments"
+    <div v-show="$configReactions.enable?.comments"
          class="reaction">
       <span class="material-symbols-outlined">
         comment
@@ -110,21 +110,6 @@ export default {
     isLiked: defaultBooleanProps,
     isDisliked: defaultBooleanProps,
   },
-  created() {
-    this.getActionsConfig();
-  },
-  data() {
-    return {
-      config: {},
-    }
-  },
-  methods: {
-    async getActionsConfig() {
-      let config = await fetch('configActions.json');
-      this.config = await config.json();
-      console.log(this.config.enable.actions);
-    }
-  }
 }
 
 </script>

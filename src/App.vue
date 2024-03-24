@@ -29,7 +29,6 @@ export default {
     components: {Post, PostWrite},
     created() { // before created
       this.loadPosts();
-      this.loadConfig();
     },
     computed: {
       getPosts() {
@@ -48,7 +47,6 @@ export default {
     data() {
       return {
         posts: [],
-        config: {}
       };
     },
     methods: {
@@ -57,13 +55,8 @@ export default {
         this.posts = await posts.json();
       },
 
-      async loadConfig() { // get project config
-        let config = await fetch('config.json');
-        this.config = await config.json();
-      },
-
       postCreate(postObj) { // method that creates another post
-        const currentDate = new Date().toLocaleString(this.config.dateFormat.locales, this.config.dateFormat);
+        const currentDate = new Date().toLocaleString(this.$config.dateFormat.locales, this.$config.dateFormat);
         this.posts.push({
           content: postObj,
           date: currentDate
