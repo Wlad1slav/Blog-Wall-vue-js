@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  publicPath: '/Blog-Wall-vue-js/',
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === "production" ? "/wlad1slav.github.io/Blog-Wall-vue-js" : "/",
 })

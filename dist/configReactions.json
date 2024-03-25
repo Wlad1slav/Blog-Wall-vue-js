@@ -1,9 +1,0 @@
-{
-  "enable": {
-    "actions": true,
-    "likes": true,
-    "dislikes": true,
-    "comments": true,
-    "views": true
-  }
-}
