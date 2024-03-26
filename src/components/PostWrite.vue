@@ -29,8 +29,9 @@
 
 <script>
 
+import {mapMutations} from "vuex";
+
 export default {
-  props: ['postCreate'],
 
   data() {
     return {
@@ -40,13 +41,16 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['addPost']),
+
     validation() { // validation of the form
       if (!this.postContent) {
         alert('Please fill the post input field.')
         return;
       }
 
-      this.$emit('postCreate', this.postContent)
+      // Vuex action from storePost
+      this.addPost(this.postContent);
 
       this.postContent = '';
     }
