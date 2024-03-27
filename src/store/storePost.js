@@ -1,8 +1,6 @@
 import {createStore} from 'vuex';
 
-import {loadConfig} from "@/utils/loadConfig";
-
-const config = await loadConfig();
+import {config} from "@/utils/loadConfig";
 
 async function load() {
     // Gets all posts from the posts.json file
@@ -46,6 +44,11 @@ const storePost = createStore({
             });
 
             await storePost.dispatch('callSort'); // call sortPosts action
+        },
+
+        async removePost(state, postIndex) {
+            // Remove a certain post
+            state.posts.splice(postIndex, 1);
         },
 
         async sortPosts(state) {

@@ -3,9 +3,9 @@ $clr--theme: rgb(50,100,255);
 $clr--theme__hover: transparentize($clr--theme, 0.9);
 $clr--accent: rgb(100, 210, 50);
 $clr--red: #ff0000;
-$clr--red__hover: lighten(transparentize($clr--red, 0.5), 25%);
+$clr--red__hover: lighten(transparentize($clr--red, 0.8), 25%);
 $clr--yellow: #fafa00;
-$clr--yellow__hover: lighten(transparentize($clr--yellow, 0.5), 25%);
+$clr--yellow__hover: lighten(transparentize($clr--yellow, 0.8), 25%);
 
 // typography
 $clr--text: rgb(30,30,30); // standard text color

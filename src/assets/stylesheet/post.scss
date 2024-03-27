@@ -79,7 +79,7 @@ $borders-width: 1px;
             // Alerts
             &.danger {
               background-color: $clr--red__hover;
-              //color: white;
+              color: $clr--red;
             }
             &.warn {
               background-color: $clr--yellow__hover;

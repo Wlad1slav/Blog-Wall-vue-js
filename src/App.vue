@@ -8,6 +8,7 @@
           :title="post.title"
           :content="post.content"
           :key="index"
+          :id="index"
           :reactions="post.reactions"
           :date-time-create="post.date"
     ></post>

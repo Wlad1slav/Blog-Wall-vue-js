@@ -14,7 +14,7 @@
       <a href="#">
         <li class="warn">Hide</li>
       </a>
-      <a href="#">
+      <a href="#" @click.prevent="removeConfirmation">
         <li class="danger">Delete</li>
       </a>
     </ul>
@@ -24,12 +24,36 @@
 
 <script>
 
+import {mapMutations, mapState} from "vuex";
+
   export default {
+    props: ['postId'],
+
     data() {
       return {
-        activeMenu: false
+        activeMenu: false,
       }
     },
+
+    computed: {
+      ...mapState(['posts'])
+    },
+
+    methods: {
+      ...mapMutations(['removePost']),
+
+      removeConfirmation() {
+
+        // Confirmation
+        let confirmation = confirm('Are you sure you want to delete this post? This action cannot be undone.')
+
+        if (confirmation) {
+          // Remove action
+          this.removePost(this.postId);
+        }
+
+      }
+    }
   }
 
 </script>

@@ -8,7 +8,7 @@ async function init() {
     const app = createApp(App);
 
     // load configs
-    app.config.globalProperties.$config = await loadConfig();
+    // app.config.globalProperties.$config = config;
     app.config.globalProperties.$configReactions = await loadConfig('configReactions.json');
 
     app.use(storePost);
