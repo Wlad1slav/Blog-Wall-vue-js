@@ -9,3 +9,5 @@ export async function loadConfig(file='config.json') {
         throw error;
     }
 }
+
+export const config = await loadConfig();
