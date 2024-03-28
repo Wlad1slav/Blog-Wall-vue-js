@@ -1,9 +1,12 @@
 <template>
-  <div class="post" :key="index">
+  <div class="post" :key="id">
+
     <p class="date">{{ dateTimeCreate }}</p>
     <h3>{{ title }}</h3>
     <p>{{ content }}</p>
-    <post-menu></post-menu>
+
+    <post-menu :post-id="id"></post-menu>
+
     <post-reaction
         :likes="reactions?.amounts.likes"
         :dislikes="reactions?.amounts.dislikes"
@@ -12,6 +15,7 @@
         :is-liked="reactions?.reacted.isLiked"
         :is-disliked="reactions?.reacted.isDisliked"
     ></post-reaction>
+
   </div>
 </template>
 
@@ -21,8 +25,8 @@
 
 <script>
 
-  import PostMenu from "../components/PostMenu.vue";
-  import PostReaction from "../components/PostReaction.vue";
+  import PostMenu from "./PostMenu.vue";
+  import PostReaction from "./PostReaction.vue";
 
   export default {
     components: {PostMenu, PostReaction},
@@ -41,7 +45,10 @@
       },
       dateTimeCreate: {
         type: String,
-      }
+      },
+      id: {
+        type: Number,
+      },
     }
   }
 
