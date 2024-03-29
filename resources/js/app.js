@@ -2,9 +2,13 @@ import "./bootstrap";
 import { createApp } from "vue";
 
 import App from "./App.vue";
-
 import router from "./router";
+
+// Utils
+import {token} from "./Utils/csrfToken";
 import {loadConfig} from "./Utils/loadConfig";
+
+// Store
 import storePost from "./Store/storePost";
 
 async function init() {
