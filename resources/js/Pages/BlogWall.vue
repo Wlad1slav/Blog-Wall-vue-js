@@ -8,9 +8,9 @@
               :title="post.title"
               :content="post.content"
               :key="index"
-              :id="index"
+              :id="post.id"
               :reactions="post.reactions"
-              :date-time-create="post.date"
+              :date-time-create="post.created_at"
         ></post>
     </div>
 

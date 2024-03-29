@@ -1,6 +1,6 @@
 <template>
 
-  <form class="post--write" :class="postContent.length > maxPostLength ? 'error' : null">
+  <form method="post" class="post--write" :class="postContent.length > maxPostLength ? 'error' : null">
 
     <textarea v-model="postContent"
               placeholder="Here's what I think..."

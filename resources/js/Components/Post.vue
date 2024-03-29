@@ -1,7 +1,7 @@
 <template>
   <div class="post" :key="id">
 
-    <p class="date">{{ dateTimeCreate }}</p>
+    <p class="date">{{ dateConvert() }}</p>
     <h3>{{ title }}</h3>
     <p>{{ content }}</p>
 
@@ -49,7 +49,12 @@
       id: {
         type: Number,
       },
-    }
+    },
+    methods: {
+        dateConvert() {
+            return new Date(this.dateTimeCreate).toLocaleString(this.$config.dateFormat.locales, this.$config.dateFormat);
+        }
+    },
   }
 
 </script>
