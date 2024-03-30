@@ -11,6 +11,7 @@
           :id="index"
           :reactions="post.reactions"
           :date-time-create="post.date"
+          :is-pinned="post.isPinned"
     ></post>
   </div>
 

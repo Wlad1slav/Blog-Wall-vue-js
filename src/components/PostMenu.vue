@@ -5,8 +5,8 @@
       more_horiz
     </span>
     <ul :class="{hidden: !activeMenu}">
-      <a href="#">
-        <li>Pin</li>
+      <a href="#" @click.prevent="pin">
+        <li>{{ !isPinned ? 'Pin' : 'Unpin' }}</li>
       </a>
       <a href="#">
         <li>Edit</li>
@@ -24,10 +24,10 @@
 
 <script>
 
-import {mapMutations, mapState} from "vuex";
+import {mapMutations} from "vuex";
 
   export default {
-    props: ['postId'],
+    props: ['postId', 'isPinned'],
 
     data() {
       return {
@@ -35,12 +35,8 @@ import {mapMutations, mapState} from "vuex";
       }
     },
 
-    computed: {
-      ...mapState(['posts'])
-    },
-
     methods: {
-      ...mapMutations(['removePost']),
+      ...mapMutations(['removePost', 'pinPost']),
 
       removeConfirmation() {
 
@@ -52,6 +48,11 @@ import {mapMutations, mapState} from "vuex";
           this.removePost(this.postId);
         }
 
+      },
+
+      pin() {
+        // Pins a specific post from above
+        this.pinPost(this.postId);
       }
     }
   }
