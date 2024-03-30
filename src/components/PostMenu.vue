@@ -5,38 +5,24 @@
       more_horiz
     </span>
     <ul :class="{hidden: !activeMenu}">
-      <a href="#" @click.prevent="pin">
-        <li>
-          <span class="material-symbols-outlined">
-            keep_public
-          </span>
-          {{ !isPinned ? 'Pin' : 'Unpin' }}
-        </li>
-      </a>
-      <a href="#">
-        <li>
-          <span class="material-symbols-outlined">
-            edit
-          </span>
-          Edit
-        </li>
-      </a>
-      <a href="#">
-        <li class="warn">
-          <span class="material-symbols-outlined">
-            hide_image
-          </span>
-          Hide
-        </li>
-      </a>
-      <a href="#" @click.prevent="removeConfirmation">
-        <li class="danger">
-          <span class="material-symbols-outlined">
-            delete_forever
-          </span>
-          Delete
-        </li>
-      </a>
+      <post-menu-element
+          :text="!isPinned ? 'Pin' : 'Unpin'"
+          icon="keep_public"
+          :method="pin"
+      ></post-menu-element>
+      <post-menu-element
+          text="Edit"
+          icon="edit"
+      ></post-menu-element>
+      <post-menu-element
+          text="Hide"
+          icon="hide_image"
+      ></post-menu-element>
+      <post-menu-element
+          text="Delete"
+          icon="delete_forever"
+          :method="removeConfirmation"
+      ></post-menu-element>
     </ul>
   </div>
 
@@ -46,7 +32,10 @@
 
 import {mapMutations} from "vuex";
 
+import PostMenuElement from "@/components/PostMenuElement.vue";
+
   export default {
+    components: {PostMenuElement},
     props: ['postId', 'isPinned'],
 
     data() {
