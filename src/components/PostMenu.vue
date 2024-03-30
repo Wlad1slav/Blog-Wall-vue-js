@@ -17,11 +17,13 @@
       <post-menu-element
           text="Hide"
           icon="hide_image"
+          alert="warn"
       ></post-menu-element>
       <post-menu-element
           text="Delete"
           icon="delete_forever"
           :method="removeConfirmation"
+          alert="danger"
       ></post-menu-element>
     </ul>
   </div>

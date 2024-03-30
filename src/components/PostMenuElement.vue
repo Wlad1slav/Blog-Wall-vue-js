@@ -1,6 +1,6 @@
 <template>
   <a href="#" @click.prevent="method">
-    <li>
+    <li :class="alert">
           <span class="material-symbols-outlined">
             {{ icon }}
           </span>
@@ -12,7 +12,7 @@
 <script>
 
 export default {
-  props: ['text', 'icon', 'method']
+  props: ['text', 'icon', 'method', 'alert']
 }
 
 </script>
