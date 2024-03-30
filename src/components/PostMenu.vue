@@ -6,16 +6,36 @@
     </span>
     <ul :class="{hidden: !activeMenu}">
       <a href="#" @click.prevent="pin">
-        <li>{{ !isPinned ? 'Pin' : 'Unpin' }}</li>
+        <li>
+          <span class="material-symbols-outlined">
+            keep_public
+          </span>
+          {{ !isPinned ? 'Pin' : 'Unpin' }}
+        </li>
       </a>
       <a href="#">
-        <li>Edit</li>
+        <li>
+          <span class="material-symbols-outlined">
+            edit
+          </span>
+          Edit
+        </li>
       </a>
       <a href="#">
-        <li class="warn">Hide</li>
+        <li class="warn">
+          <span class="material-symbols-outlined">
+            hide_image
+          </span>
+          Hide
+        </li>
       </a>
       <a href="#" @click.prevent="removeConfirmation">
-        <li class="danger">Delete</li>
+        <li class="danger">
+          <span class="material-symbols-outlined">
+            delete_forever
+          </span>
+          Delete
+        </li>
       </a>
     </ul>
   </div>

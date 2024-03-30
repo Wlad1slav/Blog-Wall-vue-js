@@ -75,16 +75,28 @@ $borders-width: 1px;
           &:hover {
             background-color: $clr--theme__hover;
             cursor: pointer;
+            span {
+              color: $clr--theme;
+            }
 
             // Alerts
             &.danger {
               background-color: $clr--red__hover;
               color: $clr--red;
+              span {
+                color: $clr--red;
+              }
             }
             &.warn {
               background-color: $clr--yellow__hover;
+              span {
+                color: darken($clr--yellow, 20%);
+              }
             }
           }
+
+
+
         }
       }
     }
