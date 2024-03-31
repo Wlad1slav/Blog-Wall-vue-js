@@ -1,11 +1,19 @@
 <template>
   <div class="post" :key="id">
 
+    <!-- Show if a post is pinned -->
+    <p class="pin-text" v-if="pinned">
+    <span class="material-symbols-outlined mb12">
+      keep_public
+    </span>
+        Pinned
+    </p>
+
     <p class="date">{{ dateConvert() }}</p>
     <h3>{{ title }}</h3>
     <p>{{ content }}</p>
 
-    <post-menu :post-id="id"></post-menu>
+    <post-menu :post-id="id" :is-pinned="pinned"></post-menu>
 
     <post-reaction
         :likes="reactions?.amounts.likes"
@@ -48,6 +56,9 @@
       },
       id: {
         type: Number,
+      },
+      pinned: {
+          type: Number, // Boolean cannot be used because the database returns all Boolean values as numeric 0/1
       },
     },
     methods: {

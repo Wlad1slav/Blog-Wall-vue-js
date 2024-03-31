@@ -30,7 +30,7 @@ const storePost = createStore({
         callSort({ commit }) {
             // Action to call sorting of all posts
             commit('sortPosts');
-        }
+        },
     },
     mutations: {
         async setPosts(state, posts) {
@@ -45,22 +45,17 @@ const storePost = createStore({
 
             try {
                 // Post creation via API
-                await axios.post('/api/post/create', {
+                let response = await axios.post('/api/post/create', {
                     postContent: newPost
                 });
+
+                // Back-end returns the created post after validation
+                state.posts.push(response.data);
+
+                await storePost.dispatch('callSort'); // call sortPosts action
             } catch (error) {
                 console.error(error);
             }
-
-            // Get the current date
-            const currentDate = new Date().toLocaleString(config.dateFormat.locales, config.dateFormat);
-
-            state.posts.push({
-                content: newPost, // The content of the new post
-                created_at: currentDate // Date and time of post creation
-            });
-
-            await storePost.dispatch('callSort'); // call sortPosts action
         },
 
         async removePost(state, postId) {
@@ -72,16 +67,49 @@ const storePost = createStore({
                 });
 
                 // Finding and deleting a post locally
-                for (let i = 0; i < state.posts.length; i++) {
-                    if (state.posts[i]['id'] === postId) {
-                        state.posts.splice(i, 1);
-                        break;
-                    }
-                }
+                const postIndex = state.posts.findIndex(post => post.id === postId);
+                state.posts.splice(postIndex, 1);
 
             } catch (error) {
                 console.error(error);
             }
+        },
+
+        async pinPost(state, postId) {
+            // Unpins all posts so that only one post can be pinned
+
+            try {
+                // Post pinning via API
+                await axios.post('/api/post/pin', {
+                    postId: postId
+                });
+
+                // Pinning visually
+                const postIndex = state.posts.findIndex(post => post.id === postId);
+
+                // Unpin past pinned post
+                for (let i = 0; i < state.posts.length; i++) {
+                    if (i !== postIndex) {
+                        state.posts[i]['is_pinned'] = 0;
+                    }
+                }
+
+                // Pin or unpin certain post
+                state.posts[postIndex]['is_pinned'] =
+                    state.posts[postIndex]['is_pinned'] === 1 ? 0 : 1;
+
+                // Move a pinned post to the first index
+                if (state.posts[postIndex]['is_pinned']) {
+                    let pinnedPost = state.posts[postIndex];
+                    state.posts.splice(postIndex, 1); // Removes an element from its current position
+                    state.posts.unshift(pinnedPost); // Inserting an element at the beginning of an array
+                } else {
+                    await storePost.dispatch('callSort'); // call sortPosts action
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
         },
 
         async sortPosts(state) {
@@ -93,7 +121,15 @@ const storePost = createStore({
                 // Subtract the dates to get a value that is either negative, positive, or zero
                 return dateB - dateA;
             });
-        }
+
+            for (let i = 0; i < state.posts.length; i++) {
+                if (state.posts[i]['is_pinned']) {
+                    let pinnedPost = state.posts[i];
+                    state.posts.splice(i, 1); // Removes an element from its current position
+                    state.posts.unshift(pinnedPost); // Inserting an element at the beginning of an array
+                }
+            }
+        },
     },
 
 });

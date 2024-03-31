@@ -16,3 +16,6 @@ Route::post('/post/create', [PostController::class, 'store']);
 
 // Delete a certain post
 Route::post('/post/delete', [PostController::class, 'delete']);
+
+// Pinning a certain post
+Route::post('/post/pin', [PostController::class, 'pin']);

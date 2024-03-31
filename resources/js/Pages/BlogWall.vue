@@ -1,5 +1,4 @@
 <template>
-
     <div id="posts">
         <post-write></post-write>
 
@@ -11,6 +10,7 @@
               :id="post.id"
               :reactions="post.reactions"
               :date-time-create="post.created_at"
+              :pinned="post.is_pinned"
         ></post>
     </div>
 

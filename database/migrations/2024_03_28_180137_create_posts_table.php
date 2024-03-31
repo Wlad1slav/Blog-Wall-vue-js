@@ -18,7 +18,9 @@ return new class extends Migration
 
             $table->string('title', 255)->nullable();
             $table->text('content');
-            $table->boolean('is_draft')->default(0);
+
+            $table->boolean('is_hidden')->default(0);
+            $table->boolean('is_pinned')->default(0);
 
             $table->timestamps();
             $table->softDeletes();
