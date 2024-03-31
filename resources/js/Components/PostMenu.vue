@@ -5,18 +5,24 @@
       more_horiz
     </span>
     <ul :class="{hidden: !activeMenu}">
-      <a href="#">
-        <li>Pin</li>
-      </a>
-      <a href="#">
-        <li>Edit</li>
-      </a>
-      <a href="#">
-        <li class="warn">Hide</li>
-      </a>
-      <a href="#" @click.prevent="removeConfirmation">
-        <li class="danger">Delete</li>
-      </a>
+        <post-menu-element
+            :text="isPinned === 0 ? 'Pin' : 'Unpin'"
+            icon="keep_public"
+            :method="pin"
+        ></post-menu-element>
+        <post-menu-element
+            text="Edit"
+            icon="edit"
+        ></post-menu-element>
+        <post-menu-element
+            text="Hide"
+            icon="hide_image"
+        ></post-menu-element>
+        <post-menu-element
+            text="Delete"
+            icon="delete_forever"
+            :method="removeConfirmation"
+        ></post-menu-element>
     </ul>
   </div>
 
@@ -25,9 +31,11 @@
 <script>
 
 import {mapMutations, mapState} from "vuex";
+import PostMenuElement from "@/Components/PostMenuElement.vue";
 
   export default {
-    props: ['postId'],
+    components: {PostMenuElement},
+    props: ['postId', 'isPinned'],
 
     data() {
       return {
@@ -40,7 +48,7 @@ import {mapMutations, mapState} from "vuex";
     },
 
     methods: {
-      ...mapMutations(['removePost']),
+      ...mapMutations(['removePost', 'pinPost']),
 
       removeConfirmation() {
 
@@ -52,6 +60,11 @@ import {mapMutations, mapState} from "vuex";
           this.removePost(this.postId);
         }
 
+      },
+
+      pin() {
+          // Pins a specific post from above
+          this.pinPost(this.postId);
       }
     }
   }
