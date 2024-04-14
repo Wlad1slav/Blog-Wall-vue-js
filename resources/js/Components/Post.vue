@@ -16,8 +16,7 @@
     <post-menu :post-id="id" :is-pinned="pinned"></post-menu>
 
     <post-reaction
-        :likes="reactions?.amounts.likes"
-        :dislikes="reactions?.amounts.dislikes"
+        :post-id="id"
         :views="reactions?.amounts.views"
         :comments="reactions?.amounts.comments"
         :is-liked="reactions?.reacted.isLiked"

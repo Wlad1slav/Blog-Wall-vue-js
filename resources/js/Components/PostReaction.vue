@@ -15,24 +15,12 @@
     <div v-show="$configReactions.enable?.likes"
          class="reaction"
          :class="[isLiked ? 'active' : null, !$configReactions.enable?.dislikes ? 'important clickable' : null]"
-         @click="() => {
-           if (!isLiked) {
-              isLiked = true;
-              likes++;
-           } else {
-              isLiked = false;
-              likes--;
-           }
-           if (isDisliked) {
-             isDisliked = false;
-             dislikes--;
-           }
-         }"
-    >
+         @click="handleReactPost('Like')"> <!-- react - model -->
+
       <span class="material-symbols-outlined" :class="isLiked ? 'yo-yo' : null">
         {{ $configReactions.enable?.dislikes ? 'thumb_up' : 'favorite' }}
       </span>
-      <p>{{ likes }}</p>
+      <p>{{ reactions.likes }}</p>
     </div>
 
     <!-- Like & dislikes amount -->
@@ -42,31 +30,19 @@
       <span class="material-symbols-outlined">
         {{ isDisliked ? 'heart_broken' : 'favorite' }}
       </span>
-      <p>{{ likes-dislikes }}</p>
+      <p>{{ reactions.likes - reactions.dislikes }}</p>
     </div>
 
     <!-- Dislike reaction -->
     <div v-show="$configReactions.enable?.dislikes"
          class="reaction"
          :class="[isDisliked ? 'active' : null, !$configReactions.enable?.likes ? 'important clickable' : null]"
-         @click="() => {
-           if (!isDisliked) {
-             isDisliked = true;
-             dislikes++;
-           } else {
-             isDisliked = false;
-             dislikes--;
-           }
-           if (isLiked) {
-             isLiked = false;
-             likes--;
-           }
-         }"
+         @click="handleReactPost('Dislike')"
     >
       <span class="material-symbols-outlined" :class="isDisliked ? 'yo-yo' : null">
         {{ $configReactions.enable?.likes ? 'thumb_down' : 'heart_broken' }}
       </span>
-      <p>{{ dislikes }}</p>
+      <p>{{ reactions.dislikes }}</p>
     </div>
 
     <!-- Reviews amount -->
@@ -85,6 +61,8 @@
 <script>
 
 // Standard object for values of the number of set reactions
+import {mapActions, mapMutations} from "vuex";
+
 const defaultAmountProps = {
   type: Number,
   default(rawProps) {
@@ -101,15 +79,35 @@ const defaultBooleanProps = {
 }
 
 export default {
-  // props: ['likes', 'dislikes', 'views', 'comments', 'isLiked', 'isDisliked'],
-  props: {
-    likes: defaultAmountProps,
-    dislikes: defaultAmountProps,
-    views: defaultAmountProps,
-    comments: defaultAmountProps,
-    isLiked: defaultBooleanProps,
-    isDisliked: defaultBooleanProps,
-  },
+    props: {
+        postId: { type: Number },
+        dislikes: defaultAmountProps,
+        views: defaultAmountProps,
+        comments: defaultAmountProps,
+        isLiked: defaultBooleanProps,
+        isDisliked: defaultBooleanProps,
+    },
+
+    data() {
+        return {
+            reactions: this.postReactions(),
+        }
+    },
+
+    methods: {
+        ...mapActions(['reactionQuery', 'getReactions']),
+
+        async handleReactPost(react) {
+            // API request to like a post
+            // Returns the new value of all reactions.
+            this.reactions = await this.reactionQuery({postId: this.postId, model: react});
+        },
+
+        async postReactions() {
+            // Query through the object with all reactions of the post
+            this.reactions = await this.getReactions(this.postId);
+        }
+    },
 }
 
 </script>

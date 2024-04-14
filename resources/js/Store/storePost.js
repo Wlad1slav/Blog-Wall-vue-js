@@ -13,6 +13,7 @@ const storePost = createStore({
     state: {
         posts: [] // Initially an empty array
     },
+
     actions: {
         async fetchPosts({ commit }) {
 
@@ -31,7 +32,35 @@ const storePost = createStore({
             // Action to call sorting of all posts
             commit('sortPosts');
         },
+
+        async reactionQuery(state, options) {
+            try {
+                // Post liking via API
+                const reactions = await axios.post('/api/post/react', {
+                    postId: options.postId,
+                    model: options.model
+                });
+
+                return await reactions.data;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        },
+
+        async getReactions(state, postId) {
+            try {
+                // Getting post reactions via API
+                const reactions = await axios.get(`/api/post/reactions?postId=${postId}`);
+
+                return await reactions.data;
+            } catch (error) {
+                console.error(error);
+                return { likes: 0, dislikes: 0 };
+            }
+        }
     },
+
     mutations: {
         async setPosts(state, posts) {
             // Update variable with posts

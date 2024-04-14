@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
@@ -49,6 +50,5 @@ class PostController extends Controller
         $post = Post::find($request->postId);
         $post->is_pinned = !$post->is_pinned;
         $post->save();
-
     }
 }
