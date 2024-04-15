@@ -15,10 +15,13 @@ class PostController extends Controller
             'postContent' => ['required'],
         ]);
 
+        Post::pullAllPostsCache();
+
         return Post::create([
            'title' => $request->postTitle ?? null,
            'content' => $request->postContent
         ]);
+
     }
 
     function delete(Request $request) {
@@ -26,11 +29,13 @@ class PostController extends Controller
             'postId' => ['exists:posts,id'],
         ]);
 
-        Post::find($request->postId)->delete();
+        Post::findCached($request->postId)->delete();
+        Post::pullPostCache($request->postId);
+        Post::pullAllPostsCache();
     }
 
     function getAll() {
-        return Post::all();
+        return Post::allCached();
     }
 
     function pin(Request $request) {
@@ -50,5 +55,7 @@ class PostController extends Controller
         $post = Post::find($request->postId);
         $post->is_pinned = !$post->is_pinned;
         $post->save();
+
+        Post::pullAllPostsCache();
     }
 }
