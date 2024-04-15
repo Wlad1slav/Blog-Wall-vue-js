@@ -36,7 +36,8 @@ class PostReactionsController extends Controller
         $model = "App\Models\\$request->model";
 
         // If the like exists, it is deleted
-        $reaction = $model::where('post_id', $request->postId);
+        $reaction = $model::where('visitor_ip', $request->ip())
+            ->where('post_id', $request->postId);
         if ($reaction->exists())
             $reaction->delete();
 
@@ -52,14 +53,24 @@ class PostReactionsController extends Controller
             $oppositeModel::where('post_id', $request->postId)->delete();
         }
 
+        Post::pullReactionsCache($request->postId);
+
         return response()->json($this->reactions($request));
     }
 
     private function reactions(Request $request)
     {   // A method that returns all post reactions (For private use)
+
+        $post = Post::findCached($request->postId);
+        $isLiked = Like::where('visitor_ip', $request->ip())
+            ->where('post_id', $request->postId)
+            ->exists();
+
         return [
-            'likes' => Post::find($request->postId)->likes->count(),
-            'dislikes' => Post::find($request->postId)->dislikes->count(),
+            'likes' => $post->likes()->count(),
+            'dislikes' => $post->dislikes()->count(),
+            'isLiked' => $isLiked,
+            'isDisliked' => !$isLiked,
         ];
     }
 }

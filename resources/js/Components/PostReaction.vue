@@ -14,10 +14,10 @@
     <!-- Like reaction -->
     <div v-show="$configReactions.enable?.likes"
          class="reaction"
-         :class="[isLiked ? 'active' : null, !$configReactions.enable?.dislikes ? 'important clickable' : null]"
+         :class="[reactions.isLiked ? 'active' : null, !$configReactions.enable?.dislikes ? 'important clickable' : null]"
          @click="handleReactPost('Like')"> <!-- react - model -->
 
-      <span class="material-symbols-outlined" :class="isLiked ? 'yo-yo' : null">
+      <span class="material-symbols-outlined" :class="reactions.isLiked ? 'yo-yo' : null">
         {{ $configReactions.enable?.dislikes ? 'thumb_up' : 'favorite' }}
       </span>
       <p>{{ reactions.likes }}</p>
@@ -26,9 +26,9 @@
     <!-- Like & dislikes amount -->
     <div v-show="$configReactions.enable?.likes && $configReactions.enable?.dislikes"
          class="reaction important"
-         :class="isLiked || isDisliked ? 'active' : null">
+         :class="reactions.isLiked || reactions.isDisliked ? 'active' : null">
       <span class="material-symbols-outlined">
-        {{ isDisliked ? 'heart_broken' : 'favorite' }}
+        {{ reactions.isDisliked ? 'heart_broken' : 'favorite' }}
       </span>
       <p>{{ reactions.likes - reactions.dislikes }}</p>
     </div>
@@ -36,10 +36,10 @@
     <!-- Dislike reaction -->
     <div v-show="$configReactions.enable?.dislikes"
          class="reaction"
-         :class="[isDisliked ? 'active' : null, !$configReactions.enable?.likes ? 'important clickable' : null]"
+         :class="[reactions.isDisliked ? 'active' : null, !$configReactions.enable?.likes ? 'important clickable' : null]"
          @click="handleReactPost('Dislike')"
     >
-      <span class="material-symbols-outlined" :class="isDisliked ? 'yo-yo' : null">
+      <span class="material-symbols-outlined" :class="reactions.isDisliked ? 'yo-yo' : null">
         {{ $configReactions.enable?.likes ? 'thumb_down' : 'heart_broken' }}
       </span>
       <p>{{ reactions.dislikes }}</p>
@@ -84,8 +84,6 @@ export default {
         dislikes: defaultAmountProps,
         views: defaultAmountProps,
         comments: defaultAmountProps,
-        isLiked: defaultBooleanProps,
-        isDisliked: defaultBooleanProps,
     },
 
     data() {
