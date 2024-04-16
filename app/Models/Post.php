@@ -47,7 +47,7 @@ class Post extends Model
 
     static public function pullPostCache($id): void
     {   // Deletes the cache of a specific post
-        Cache::pull("all_posts");
+        Cache::pull("post_$id");
     }
 
     static public function findCached(int $id)
